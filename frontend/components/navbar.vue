@@ -20,17 +20,30 @@
           >
             Contato
           </NuxtLink>
-          <NuxtLink
-            to="/login"
-            class="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
-          >
-            Login
-          </NuxtLink>
+          <template v-if="isLoggedIn">
+            <NuxtLink
+              to="/admin"
+              class="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
+            >
+              Dashboard
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <NuxtLink
+              to="/login"
+              class="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
+            >
+              Login
+            </NuxtLink>
+          </template>
         </nav>
       </div>
     </header>
   </template>
   
   <script setup>
+  const isLoggedIn = useAuthStore().isLoggedIn;
+  console.log(isLoggedIn);
+  
   </script>
   

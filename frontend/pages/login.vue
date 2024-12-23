@@ -35,6 +35,12 @@
           </button>
         </form>
       </div>
+      <button
+      @click="getUser"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          >
+            GetUser
+          </button>
     </section>
   </template>
   
@@ -42,6 +48,9 @@
 import actions from '~/actions';
 import type { LoginForm } from '~/actions/auth/login.ts';
 
+definePageMeta({
+  middleware: 'guest'
+})
 
 const form = ref<LoginForm>({
   email: 'admin@admin',
@@ -50,6 +59,11 @@ const form = ref<LoginForm>({
 
 const handleLogin = async () => {
   await actions.auth.login(form.value)
+  navigateTo('/admin')
+}
+
+const getUser = async () => {
+    console.log(useAuthStore().user)
 }
 
 </script>

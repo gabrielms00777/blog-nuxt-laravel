@@ -5,6 +5,6 @@ export interface User {
 }
 
 export async function fetchUser() {
-    const user = await useGet<User>("/api/user");
+    const user = await useGet("/api/user");
     useAuthStore().setUser(user.data.value as User);
 }
