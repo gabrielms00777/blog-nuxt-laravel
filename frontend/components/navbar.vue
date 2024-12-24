@@ -43,7 +43,5 @@
   
   <script setup>
   const isLoggedIn = useAuthStore().isLoggedIn;
-  console.log(isLoggedIn);
-  
   </script>
   

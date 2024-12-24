@@ -41,6 +41,8 @@
         >
           Estatísticas
         </NuxtLink>
+        <hr>
+        <button @click="logout" class="block w-full px-6 py-3 text-gray-700 hover:bg-red-100 rounded-lg transition">Sair</button>
       </nav>
     </aside>
 
@@ -53,9 +55,19 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
+import actions from '~/actions';
 
 const route = useRoute();
 const isActive = (path) => route.path.startsWith(path);
+
+const logout = async () => {
+    try {
+        await actions.auth.logout();
+        navigateTo('/login');
+    } catch (error) {
+        console.error('Erro ao deslogar:', error);
+    }
+}
 </script>
 
 <style scoped>

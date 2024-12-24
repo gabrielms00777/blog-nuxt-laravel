@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -14,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::all());
+        return Cache::rememberForever('admin.users.index', function () {
+            return UserResource::collection(User::all());
+        });
     }
 
     /**

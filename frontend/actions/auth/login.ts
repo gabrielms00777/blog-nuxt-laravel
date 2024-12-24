@@ -6,7 +6,15 @@ export interface LoginForm {
     password: string
 }
   
-  export async function login(form: LoginForm) {
-    await usePost("/login", { body: form });
-    await actions.auth.fetchUser();
+export async function login(form: LoginForm) {
+  try {
+    return await usePost("/login", { body: form });
+    // const response = await usePost("/login", { body: form });
+    // console.log(response.data.value);
+    // return response.data.value;
+    // await actions.auth.fetchUser();
+  } catch (error: any) {
+    console.log(error);
+    throw error; // Propaga o erro para tratamento na interface
   }
+}
