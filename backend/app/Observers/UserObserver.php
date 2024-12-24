@@ -13,6 +13,7 @@ class UserObserver
     public function created(User $user): void
     {
         Cache::forget('admin.users.index');
+        Cache::forget('admin.users.active');
     }
 
     /**
@@ -21,6 +22,7 @@ class UserObserver
     public function updated(User $user): void
     {
         Cache::forget('admin.users.index');
+        Cache::forget('admin.users.active');
     }
 
     /**
@@ -29,6 +31,7 @@ class UserObserver
     public function deleted(User $user): void
     {
         Cache::forget('admin.users.index');
+        Cache::forget('admin.users.active');
     }
 
     /**

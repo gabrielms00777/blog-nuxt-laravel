@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +9,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/admin/users', UserController::class);
+Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    Route::apiResource('/users', UserController::class);
+    Route::get('/statistics', StatisticsController::class)->name('statistics');
+});
+
+
 
 Route::get('/posts', function () {
     return response()->json([
